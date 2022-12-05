@@ -4,10 +4,19 @@ import "./App.css";
 const Modal = (props) => {
   return (
     <div className="modal" style={{ background: props.color }}>
-      <h4>{props.title[0]}</h4>
+      <h4>
+        {props.titleIdx === 0 && props.title[0]}
+        {props.titleIdx === 1 && props.title[1]}
+        {props.titleIdx === 2 && props.title[2]}
+      </h4>
       <p>날짜</p>
       <p>상세내용</p>
-      <button className="modal-title-change-btn" onClick={props.onClickChangeTitle}>title 변경</button>
+      <button
+        className="modal-title-change-btn"
+        onClick={props.onClickChangeTitle}
+      >
+        title 변경
+      </button>
     </div>
   );
 };
@@ -20,6 +29,8 @@ function App() {
     "리액트를 다루는 기술",
     "알고리즘 첫걸음",
   ]);
+
+  let [titleIdx, setTitleIdx] = useState(0);
 
   const onClickChangeTitle = () => {
     let copy = [...title];
@@ -57,7 +68,12 @@ function App() {
 
       {title.map((el, idx) => (
         <div className="list" key={idx}>
-          <h4 onClick={onClickModal}>
+          <h4
+            onClick={() => {
+              onClickModal();
+              setTitleIdx(idx);
+            }}
+          >
             {el}{" "}
             <span
               onClick={() => {
@@ -74,7 +90,14 @@ function App() {
         </div>
       ))}
 
-      {modalOpen && <Modal title={title} color={"#FFADBC"} onClickChangeTitle={onClickChangeTitle}/>}
+      {modalOpen && (
+        <Modal
+          title={title}
+          titleIdx={titleIdx}
+          color={"#FFADBC"}
+          onClickChangeTitle={onClickChangeTitle}
+        />
+      )}
     </div>
   );
 }
