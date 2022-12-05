@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "./App.css";
 
-const Modal = () => {
+const Modal = (props) => {
   return (
-    <div className="modal">
-      <h4>제목</h4>
+    <div className="modal" style={{ background: props.color }}>
+      <h4>{props.title[0]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button className="modal-title-change-btn" onClick={props.onClickChangeTitle}>title 변경</button>
     </div>
   );
 };
@@ -36,7 +37,7 @@ function App() {
   let [modalOpen, setModalOpen] = useState(false);
 
   const onClickModal = () => {
-    setModalOpen((prev) => !prev);
+    setModalOpen(true);
   };
 
   return (
@@ -73,7 +74,7 @@ function App() {
         </div>
       ))}
 
-      {modalOpen && <Modal />}
+      {modalOpen && <Modal title={title} color={"#FFADBC"} onClickChangeTitle={onClickChangeTitle}/>}
     </div>
   );
 }
