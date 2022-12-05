@@ -31,11 +31,7 @@ function App() {
     setTitle(copy);
   };
 
-  let [like, setLike] = useState(0);
-
-  const onClickLike = () => {
-    setLike(like + 1);
-  };
+  let [like, setLike] = useState([0, 0, 0]);
 
   let [modalOpen, setModalOpen] = useState(false);
 
@@ -58,21 +54,24 @@ function App() {
         </button>
       </div>
 
-      <div className="list">
-        <h4>
-          {title[0]} <span onClick={onClickLike}>👍</span>{" "}
-          <span className="like">{like}</span>
-        </h4>
-        <p>2월 17일 발행</p>
-      </div>
-      <div className="list">
-        <h4>{title[1]}</h4>
-        <p>2월 18일 발행</p>
-      </div>
-      <div className="list">
-        <h4 onClick={onClickModal}>{title[2]}</h4>
-        <p>2월 19일 발행</p>
-      </div>
+      {title.map((el, idx) => (
+        <div className="list" key={idx}>
+          <h4 onClick={onClickModal}>
+            {el}{" "}
+            <span
+              onClick={() => {
+                let copy = [...like];
+                copy[idx] = copy[idx] + 1;
+                setLike(copy);
+              }}
+            >
+              👍
+            </span>{" "}
+            <span className="like">{like[idx]}</span>
+          </h4>
+          <p>2월 18일 발행</p>
+        </div>
+      ))}
 
       {modalOpen && <Modal />}
     </div>
