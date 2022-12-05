@@ -39,8 +39,23 @@ div {
 }
 
 .list {
-  padding-left: 20px;
+  padding: 0 20px 0 20px;
   border-bottom: 1px solid #863A6F;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-board-btn {
+  width: 80px;
+  height: 30px;
+  font-size: 14px;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .like {
@@ -60,6 +75,28 @@ div {
   font-size: 14px;
   border: none;
   background: black;
+  color: white;
+  margin-right: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.create-board {
+  padding: 20px 0 0 20px;
+}
+
+.create-board-input {
+  width: 152px;
+  height: 24px;
+  margin-right: 20px;
+}
+
+.create-board-btn {
+  width: 80px;
+  height: 30px;
+  font-size: 14px;
+  border: none;
+  background: #FFADBC;
   color: white;
   margin-right: 20px;
   border-radius: 5px;

@@ -43,6 +43,18 @@ function App() {
     setTitle(copy);
   };
 
+  let [titleInput, setTitleInput] = useState("");
+
+  const onChangeTitle = (e) => {
+    setTitleInput(e.target.value);
+  };
+
+  const onClickCreateBoard = () => {
+    let copy = [...title];
+    copy.unshift(titleInput);
+    setTitle(copy);
+  };
+
   let [like, setLike] = useState([0, 0, 0]);
 
   let [modalOpen, setModalOpen] = useState(false);
@@ -68,27 +80,49 @@ function App() {
 
       {title.map((el, idx) => (
         <div className="list" key={idx}>
-          <h4
-            onClick={() => {
-              onClickModal();
-              setTitleIdx(idx);
-            }}
-          >
-            {el}{" "}
-            <span
+          <div>
+            <h4
               onClick={() => {
-                let copy = [...like];
-                copy[idx] = copy[idx] + 1;
-                setLike(copy);
+                onClickModal();
+                setTitleIdx(idx);
               }}
             >
-              👍
-            </span>{" "}
-            <span className="like">{like[idx]}</span>
-          </h4>
-          <p>2월 18일 발행</p>
+              {el}{" "}
+              <span
+                onClick={(e) => {
+                  e.stopPropagation();
+                  let copy = [...like];
+                  copy[idx] = copy[idx] + 1;
+                  setLike(copy);
+                }}
+              >
+                👍
+              </span>{" "}
+              <span className="like">{like[idx]}</span>
+            </h4>
+            <p>2월 18일 발행</p>
+          </div>
+          <div>
+            <button
+              onClick={() => {
+                let copy = [...title];
+                copy.splice(idx, 1);
+                setTitle(copy);
+              }}
+              className="delete-board-btn"
+            >
+              delete
+            </button>
+          </div>
         </div>
       ))}
+
+      <div className="create-board">
+        <input className="create-board-input" onChange={onChangeTitle} />
+        <button onClick={onClickCreateBoard} className="create-board-btn">
+          create
+        </button>
+      </div>
 
       {modalOpen && (
         <Modal
