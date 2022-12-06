@@ -49,6 +49,7 @@ function App() {
   };
 
   const onClickCreateBoard = () => {
+    if(!titleInput) throw new Error("글 제목을 입력해주세요")
     let titleCopy = [...title];
     titleCopy.unshift(titleInput);
     setTitle(titleCopy);
