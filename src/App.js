@@ -31,6 +31,7 @@ function App() {
   ]);
 
   let [titleIdx, setTitleIdx] = useState(0);
+  let [titleInput, setTitleInput] = useState("");
 
   const onClickChangeTitle = () => {
     let copy = [...title];
@@ -43,16 +44,18 @@ function App() {
     setTitle(copy);
   };
 
-  let [titleInput, setTitleInput] = useState("");
-
   const onChangeTitle = (e) => {
     setTitleInput(e.target.value);
   };
 
   const onClickCreateBoard = () => {
-    let copy = [...title];
-    copy.unshift(titleInput);
-    setTitle(copy);
+    let titleCopy = [...title];
+    titleCopy.unshift(titleInput);
+    setTitle(titleCopy);
+
+    let likeCopy = [...like]
+    likeCopy.unshift(0)
+    setLike(likeCopy)
   };
 
   let [like, setLike] = useState([0, 0, 0]);
