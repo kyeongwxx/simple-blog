@@ -61,6 +61,8 @@ function App() {
 
   let [like, setLike] = useState([0, 0, 0]);
 
+  let [date, setDate] = useState(new Date())
+
   let [modalOpen, setModalOpen] = useState(false);
 
   const onClickModal = () => {
@@ -104,7 +106,7 @@ function App() {
               </span>{" "}
               <span className="like">{like[idx]}</span>
             </h4>
-            <p>2월 18일 발행</p>
+            <p>{date.toString().slice(0, 15)}</p>
           </div>
           <div>
             <button
